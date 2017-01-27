@@ -28,7 +28,7 @@ and open the template in the editor.
 
         
         <div class="header">
-            questo testo è scritto assolutamente a caso
+            questo testo è scritto assolutamente a caso, ed è stato modificato
         </div>
         
         <div class="menuFrame">
