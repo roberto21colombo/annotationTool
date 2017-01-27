@@ -25,11 +25,11 @@
         function isVideoWatched($id,$video,$type){
             
             if(file_exists("annotation/".$id."/".$video."/".$type.".csv")){
-                return '<img src="check.png" height="15" width="15"';
+                return '<img src="img/check.png" height="15" width="15"';
             }
             else
             {
-                return '<img src="uncheck.png" height="15" width="15"';
+                return '<img src="img/uncheck.png" height="15" width="15"';
             }
         }
     }
