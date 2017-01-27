@@ -10,17 +10,14 @@ and open the template in the editor.
     $video = Model::getVideoByUsrId($id);
 ?>
 
-
 <html>
     <head>
         <title>Annotation Tool</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="ajax.js"></script>
     </head>
     
     <body>
@@ -39,9 +36,16 @@ and open the template in the editor.
                 </tr>
                 <?php
                 while($riga = mysqli_fetch_array($video)){
-                    echo '<tr> '
-                        . '<td><a href="/annotationtool/index.php?id='.$id.'&vid='.$riga['name'].'&type=arousal">'.$riga['name'].'</a></td>'.                
-                        '<td><a href="/annotationtool/index.php?id='.$id.'&vid='.$riga['name'].'&type=valence">'.$riga['name'].'</a></td>'.
+                    echo 
+                    '<tr> '
+                        . '<td>'
+                            . '<a href="/annotationtool/index.php?id='.$id.'&vid='.$riga['name'].'&type=arousal">'.$riga['name']
+                            . Model::isVideoWatched($id,$riga['name'],'arousal').'</a>'
+                        . '</td>'              
+                        . '<td>'
+                            . '<a href="/annotationtool/index.php?id='.$id.'&vid='.$riga['name'].'&type=valence">'.$riga['name']
+                            . Model::isVideoWatched($id,$riga['name'],'valence').'</a>'
+                            . '</td>'.
                     '</tr>';
                 }
                 ?>  
