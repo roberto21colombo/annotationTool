@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-gen-2017, 11.39.39
+    Author     : roberto
+*/
+
+.header{
+    width: 100%;
+    /*background: red;*/
+}
+.menuFrame{
+    width: 30%;
+    /*background: yellow;*/
+    float: left;
+}
+.videoFrame{
+    width: 70%;
+    /*background: green;*/
+    float: left;
+}
+table{
+    width: 90%;
+    margin: auto;
+    border: 1px solid black;
+    margin-top: 30px;
+}
+td, th{
+    padding-left: 3px;
+}
+video, source{
+    margin-left: 10px;
+    width: 95%;
+    
+}
