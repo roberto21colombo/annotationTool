@@ -71,7 +71,13 @@ and open the template in the editor.
                 <span id="range">0</span>
                 <span id="down">no</span>
                 <span id="second">0</span>
-                <script type="text/javascript">
+                <?php include './slidebar.php'; ?>
+            </div>
+        </div>
+        
+        <div style="clear:both;"></div>
+        
+        <script type="text/javascript">
                     var valSlidebar = "0";
                     var currentTime = 0;
                     
@@ -124,12 +130,6 @@ and open the template in the editor.
                     }
                     
                 </script>
-            </div>
-        </div>
-        
-        <div style="clear:both;"></div>
-        
-        
 
     </body>
 </html>
