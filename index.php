@@ -24,7 +24,7 @@ and open the template in the editor.
                 
 
         
-        <div class="header">
+        <div id="header">
             questo testo è scritto assolutamente a caso, ed è stato modificato
         </div>
         
@@ -66,19 +66,23 @@ and open the template in the editor.
             
             }
             ?>
-            <div style="width: 100%">
-                <input id = "slidebar" type="range" min="-1" max="1" value="0" step="0.01" onmouseup="miaFunc('up')" onmousedown="miaFunc('down')" onmousemove="showValue(this.value)"/>
-                <span id="range">0</span>
-                <span id="down">no</span>
-                <span id="second">0</span>
-                <?php include './slidebar.php'; ?>
+            
+            <!--<input id = "slidebar" type="range" min="-1" max="1" value="0" step="0.01" onmouseup="miaFunc('up')" onmousedown="miaFunc('down')" onmousemove="showValue(this.value)"/>
+            <span id="range">0</span>
+            <span id="down">no</span>
+            <span id="second">0</span>-->
+            <?php include './slidebar.php'; ?>
+            <div class="sam">
+                <img class="samimg" src="img/sam<?php echo $_GET['type'].'.png'?>"/>
             </div>
         </div>
         
         <div style="clear:both;"></div>
         
         <script type="text/javascript">
-                    var valSlidebar = "0";
+                    
+                    
+                    
                     var currentTime = 0;
                     
                     var arrayAnnot = 
@@ -92,21 +96,12 @@ and open the template in the editor.
                     function readVid() {
                         currentTime = document.getElementById("myVid").currentTime;
                         
-                        document.getElementById("second").innerHTML = currentTime;
+                        //document.getElementById("second").innerHTML = currentTime;
                         
-                        /*
-                        element.time = currentTime;
-                        element.val = valSlidebar;
-                        console.log("currentTime: "+currentTime+"; slidebarVal: "+valSlidebar);
-                        arrayValVid.push(element);
-                        */
-                       arrayAnnot.valvid.push({timeStamp:currentTime, value:valSlidebar});
+                        
+                        arrayAnnot.valvid.push({timeStamp:currentTime, value:valSlidebar});
                     }
                     function vidEnded(){
-                        //window.location = '/annotationtool/visualizza.php?array[]='+arrayValVid;
-                        //console.log(tempi);
-                        //console.log(valori);
-                        //console.log(arrayValVid);
                         
                         
                         var json = JSON.stringify(arrayAnnot);
@@ -119,15 +114,15 @@ and open the template in the editor.
                             cache: false
                         });
                     }
-                    function showValue(newValue)
-                    {
-                        this.valSlidebar=newValue;
-                        document.getElementById("range").innerHTML=valSlidebar;
-                    }
-                    function miaFunc(gest)
-                    {
-                        document.getElementById("down").innerHTML=gest;
-                    }
+//                    function showValue(newValue)
+//                    {
+//                        this.valSlidebar=newValue;
+//                        document.getElementById("header").innerHTML=valSlidebar;
+//                    }
+//                    function miaFunc(gest)
+//                    {
+//                        document.getElementById("down").innerHTML=gest;
+//                    }
                     
                 </script>
 

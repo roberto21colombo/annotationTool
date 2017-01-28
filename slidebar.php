@@ -4,40 +4,51 @@
         <link rel="stylesheet" type="text/css" href="css/figure.css"/>
     </head>
     <body onmousemove="follow(event)">
-        <div id="bar" onclick="switchActivate()">
-            <div id="slider"></div>
+        <div class = "divSlidebar" onclick="switchActivate()">
+            <img id="slider" src="img/button.png"></img>
+            <img id="bar" src="img/bar.png"></img>
+            
         </div>
-        
+        <div style="clear:both;"></div>
         <script>
+            var valSlidebar = 0;
+            
             var bar = document.getElementById('bar');
             var slider = document.getElementById('slider');
+            
+            var halfWidthSlider = slider.offsetWidth/2;
             
             var activate = false;
             
             var posBar = getPos(bar);
-            var xiBar = bar.offsetLeft;
-            var xfBar = bar.offsetLeft+bar.offsetWidth-slider.offsetWidth;
+            var xiBar = bar.offsetLeft-halfWidthSlider;
+            var xfBar = bar.offsetLeft+bar.offsetWidth-slider.offsetWidth+halfWidthSlider;
             
-            slider.style.position = "absolute";
+            //slider.style.position = "absolute";
             
             function switchActivate() {
                 activate = !activate;
             }
             
             function follow(event){
+                
                 if(activate){
-                    var x = event.clientX;
+                    var x = event.clientX-halfWidthSlider; //alle coordinate del mouse e tolgo 20 (metà larghezzaslider), in modo che il cursore sia al centro
                     if(x>xiBar && x<xfBar){
                         //var y = event.clientY;
                         slider.style.left = x+'px';
-                        slider.innerHTML = getValSlidebar(x, xiBar, xfBar);;
+                        valSlidebar= getValSlidebar(x, xiBar, xfBar);
+                        //slider.innerHTML = getValSlidebar(x, xiBar, xfBar);
                     }else if (x<=xiBar){
                         slider.style.left = xiBar+'px';
-                        slider.innerHTML = "-1";
+                        valSlidebar = -1;
+                        //slider.innerHTML = "-1";
                     }else if (x>=xfBar) {
                         slider.style.left = xfBar+'px';
-                        slider.innerHTML = "1";
+                        valSlidebar= 1;
+                        //slider.innerHTML = "1";
                     }
+                    document.getElementById("header").innerHTML=valSlidebar;
                 }
             }
             
