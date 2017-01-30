@@ -20,58 +20,34 @@ and open the template in the editor.
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     </head>
     
-    <body>
-                
-
+    <body id="bodycontainer">
         
-        <div id="header">
-            questo testo è scritto assolutamente a caso, ed è stato modificato
-        </div>
         
+        
+        <!--sezione che gestisce la tabella con la lista dei video-->
         <div class="menuFrame">
-            <table class="menuVideos">
-                <tr>
-                    <td><h3>Arousal</h3></td>
-                    <td><h3>Valence</h3></td>
-                </tr>
-                <?php
-                while($riga = mysqli_fetch_array($video)){
-                    echo 
-                    '<tr> '
-                        . '<td>'
-                            . '<a href="/annotationtool/index.php?id='.$id.'&vid='.$riga['name'].'&type=arousal">'.$riga['name']
-                            . Model::isVideoWatched($id,$riga['name'],'arousal').'</a>'
-                        . '</td>'              
-                        . '<td>'
-                            . '<a href="/annotationtool/index.php?id='.$id.'&vid='.$riga['name'].'&type=valence">'.$riga['name']
-                            . Model::isVideoWatched($id,$riga['name'],'valence').'</a>'
-                            . '</td>'.
-                    '</tr>';
-                }
-                ?>  
-            </table>
-            <ul>
-                
-            </ul>
+            <div id="header" style="text-align: center">
+            <h1>Annotation Tool</h1>
+        </div>
+            <?php include './videoMenuTable.php';?>
         </div>
         
-        <div class="videoFrame">
-            <?php 
-            if(isset($_GET['vid']))
-            {
-                echo '<h2 style="display: inline">'.$_GET['type'].':</h2><h3 style="display: inline"> '.$_GET['vid'].'</h3>';
-                echo '<video id="myVid" ontimeupdate="readVid()" onended="vidEnded()" controls>';
-                echo '<source src="video/'.$_GET['vid'].'" type="video/ogg">';
-                echo '</video>';
-            
-            }
-            ?>
-            
-            <!--<input id = "slidebar" type="range" min="-1" max="1" value="0" step="0.01" onmouseup="miaFunc('up')" onmousedown="miaFunc('down')" onmousemove="showValue(this.value)"/>
-            <span id="range">0</span>
-            <span id="down">no</span>
-            <span id="second">0</span>-->
+        <!--
+        div che include la seconda sezione del sito
+        titolo video
+        video
+        slidebar
+        sam
+        -->
+        <div class="videoFrame" id="videoFrame" style="visibility: <?php if(isset($_GET['vid'])) echo 'visible'; else echo 'hidden' ?>">
+          
+            <!--Sezione che carica il titolo del video e il video stesso-->
+            <?php include './videoPlayer.php'; ?>
+
+            <!--Includo la slidebar e il suo funzioanmento, registrando automaticamente i valori dentro valSlidebar-->
             <?php include './slidebar.php'; ?>
+
+            <!--carico immagine del sam in base al tipo di video-->
             <div class="sam">
                 <img class="samimg" src="img/sam<?php echo $_GET['type'].'.png'?>"/>
             </div>
@@ -80,51 +56,36 @@ and open the template in the editor.
         <div style="clear:both;"></div>
         
         <script type="text/javascript">
-                    
-                    
-                    
-                    var currentTime = 0;
-                    
-                    var arrayAnnot = 
-                        {
-                            idUtente:<?php echo $_GET['id'] ?>,
-                            video:<?php echo '"'.$_GET['vid'].'"' ?>,
-                            tipo:<?php echo '"'.$_GET['type'].'"' ?>,
-                            valvid:[]
-                        };
-                    
-                    function readVid() {
-                        currentTime = document.getElementById("myVid").currentTime;
-                        
-                        //document.getElementById("second").innerHTML = currentTime;
-                        
-                        
-                        arrayAnnot.valvid.push({timeStamp:currentTime, value:valSlidebar});
-                    }
-                    function vidEnded(){
-                        
-                        
-                        var json = JSON.stringify(arrayAnnot);
-                        //console.log(arrayValVid);
-                        console.log(json);
-                        $.ajax({
-                            type: "POST",
-                            url: "visualizza.php",
-                            data: {data : json}, 
-                            cache: false
-                        });
-                    }
-//                    function showValue(newValue)
-//                    {
-//                        this.valSlidebar=newValue;
-//                        document.getElementById("header").innerHTML=valSlidebar;
-//                    }
-//                    function miaFunc(gest)
-//                    {
-//                        document.getElementById("down").innerHTML=gest;
-//                    }
-                    
-                </script>
+            var currentTime = 0;
+
+            var arrayAnnot = 
+                {
+                    idUtente:<?php echo $_GET['id'] ?>,
+                    video:<?php echo '"'.$_GET['vid'].'"' ?>,
+                    tipo:<?php echo '"'.$_GET['type'].'"' ?>,
+                    valvid:[]
+                };
+
+            
+            function readVid() {
+                currentTime = document.getElementById("myVid").currentTime;
+                arrayAnnot.valvid.push({timeStamp:currentTime, value:valSlidebar});
+            }
+            function vidEnded(){
+                var json = JSON.stringify(arrayAnnot);
+                console.log(json);
+                $.ajax({
+                    type: "POST",
+                    url: "saveAnnotation.php",
+                    data: {data : json}, 
+                    cache: false
+                });
+                setTimeout(function() {
+                    window.location.reload();
+                }, 500);
+            }
+
+        </script>
 
     </body>
 </html>

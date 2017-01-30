@@ -1,12 +1,9 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 19-gen-2017, 11.39.39
-    Author     : roberto
-*/
+
+#bodycontainer{
+    padding-top: 20px;
+    background: beige;
+    font-family: Times New Roman;
+}
 
 .header{
     width: 100%;
@@ -14,7 +11,6 @@ and open the template in the editor.
 }
 .menuFrame{
     width: 30%;
-    /*background: yellow;*/
     float: left;
 }
 .videoFrame{
@@ -26,7 +22,7 @@ and open the template in the editor.
 }
 
 table{
-    width: 90%;
+    width: 80%;
     margin: auto;
     border: 1px solid black;
     margin-top: 30px;
@@ -37,7 +33,7 @@ td, th{
 video, source{
     /*margin-left: 10px;*/
     width: 100%;
-    
+    border: black solid 2px;
 }
 .samimg{
     padding-top: 20px;
