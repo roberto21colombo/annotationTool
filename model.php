@@ -19,6 +19,7 @@
             if($risultato === FALSE) { 
                 die(mysql_error()); // TODO: better error handling
             }
+            mysqli_close($conn);
             return $risultato;
         }
         
@@ -34,6 +35,43 @@
             {
                 return '<img src="img/uncheck.png" height="15" width="15"';
             }
+        }
+        
+        function isAnnotationExist($idUtente, $video, $tipo){
+            $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
+            $query = 'SELECT COUNT("id") FROM annotation WHERE UserId="'.$idUtente.'" AND NameVideo="'.$video.'" AND TypeVideo="'.$tipo.'"';
+            
+            $result = mysqli_query($conn, $query);
+            if($result==0){
+                return false;
+            }else{
+                return true;
+            }
+            
+            mysqli_close($conn);
+        }
+        
+        function rmOldAnnotation($idUtente, $video, $tipo){
+            $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
+            $query = 'DELETE FROM annotation WHERE UserId="'.$idUtente.'" AND NameVideo="'.$video.'" AND TypeVideo="'.$tipo.'"';
+            
+            mysqli_query($conn, $query);
+            
+            mysqli_close($conn);
+        }
+        
+        function addAnnotation($data){
+            $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
+            
+            $mydebug = fopen("debug.txt", "w") or die("Unable to open file!");
+            
+            
+            foreach($data->valvid as $row){
+                $query='INSERT INTO annotation VALUES ("'.$row->timeStamp.'","'.$data->idUtente.'","'.$data->video.'","'.$data->tipo.'","'.$row->value.'",NULL);';
+                mysqli_query($conn, $query);
+                fwrite($mydebug, $query);
+            }
+            mysqli_close($conn);
         }
     }
 ?>
