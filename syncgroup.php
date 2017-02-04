@@ -9,14 +9,14 @@ $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
 clearTables($conn);
 
 //array con i nomi delle cartelle
-$arrayFolder = array_diff(scandir("videoP"), array('.', '..','.DS_Store'));
+$arrayFolder = array_diff(scandir("video"), array('.', '..','.DS_Store'));
 foreach ($arrayFolder as $folder){
     echo $folder;
     echo '</br>';
     
     //carico il nome del gruppo sul DB
     addGroup($folder, $conn);
-    $arrayVideo = array_diff(scandir("videoP/".$folder), array('.', '..','.DS_Store'));
+    $arrayVideo = array_diff(scandir("video/".$folder), array('.', '..','.DS_Store'));
     foreach ($arrayVideo as $video){
         echo $video;
         echo '</br>';
@@ -28,8 +28,9 @@ foreach ($arrayFolder as $folder){
     }
 }
 
- mysqli_close($conn);
+mysqli_close($conn);
  
+header('Location: managerPage.php');
  
  
  

@@ -73,5 +73,36 @@
             }
             mysqli_close($conn);
         }
+        
+        function getGroupFromId($id){
+            $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
+            $query = 'SELECT groups.name FROM groups, users WHERE users.id = '.$id.' AND users.fk_idgroup=groups.id';
+            $result = mysqli_query($conn, $query);
+            mysqli_close($conn);
+            return (mysqli_fetch_array($result)['name']);
+        }
+        
+        function getGroups(){
+            $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
+            $query = 'SELECT * FROM groups;';
+            $result = mysqli_query($conn, $query);
+            mysqli_close($conn);
+            return $result;
+        }
+        
+        function addUser($id, $group){
+            $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
+            $query = 'INSERT INTO users VALUES ('.$id.', '.$group.');';
+            mysqli_query($conn, $query);
+            mysqli_close($conn);
+        }
+        
+        function getLastUserID(){
+            $conn = mysqli_connect('localhost', 'root', '', 'annotationdb');
+            $query = 'SELECT id FROM users ORDER BY id DESC LIMIT 1;';
+            $result = mysqli_query($conn, $query);
+            mysqli_close($conn);
+            return mysqli_fetch_array($result)['id'];
+        }
     }
 ?>
