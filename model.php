@@ -93,9 +93,9 @@
             return $result;
         }
         
-        function addUser($id, $group){
+        function addUser($name, $surname, $email, $id, $group){
             $conn = mysqli_connect($GLOBALS['db_host'], $GLOBALS['db_user'], $GLOBALS['db_pass'], $GLOBALS['db_name']);
-            $query = 'INSERT INTO users VALUES ('.$id.', '.$group.');';
+            $query = 'INSERT INTO users VALUES ('.$id.', '.$group.', "'.$name.'", "'.$surname.'", "'.$email.'");';
             mysqli_query($conn, $query);
             mysqli_close($conn);
         }
