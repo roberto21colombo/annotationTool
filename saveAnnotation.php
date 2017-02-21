@@ -27,14 +27,11 @@
         
         //parte in cui carico il json su database
         //prima dovrei controllare che il video in questione non sia già presente sul db
-        
-        
         $exist = model::isAnnotationExist($idUtente, $video, $tipo);
         if($exist){
             model::rmOldAnnotation($idUtente, $video, $tipo);
         }
-        
-          Model::addAnnotation($data);
+        Model::addAnnotation($data);
     }
       
 ?>
