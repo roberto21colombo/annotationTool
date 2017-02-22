@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/annotationtool/css/main.css</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/annotationtool/panelControl.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/annotationtool/syncgroup.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/annotationtool/addUser.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/annotationtool/config.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/annotationtool/model.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/annotationtool/managerPage.php</file>
+        </group>
     </open-files>
 </project-private>
