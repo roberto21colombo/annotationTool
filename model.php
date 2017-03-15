@@ -31,7 +31,7 @@
         //un'immagine di check se il video non è ancora stato analizzato 
         function isVideoWatched($id,$video,$type){
             
-            if(file_exists("annotation/".$id."/".$video."/".$type.".csv")){
+            if(file_exists("annotation/".$id."/".str_replace(".", "_", $video)."/".$type.".csv")){
                 return '<img src="img/check.png" height="15" width="15"';
             }
             else

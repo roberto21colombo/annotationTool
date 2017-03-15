@@ -10,7 +10,7 @@
     $data = json_decode(stripslashes($_POST['data']));
     
     $idUtente = $data->idUtente;
-    $video = $data->video;
+    $video = str_replace(".", "_", $data->video);
     $tipo = $data->tipo;
     if(isset($data)){
         if (!file_exists("annotation/".$idUtente."/".$video)) {
